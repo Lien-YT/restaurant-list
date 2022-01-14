@@ -8,10 +8,12 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 app.use(express.static('public'))
 
+// index page route
 app.get('/', (req, res) => {
   res.render('index', { restaurants })
 })
 
+// show page route
 app.get('/restaurants/:restaurant_id', (req, res) => {
   const {restaurant_id} = req.params
   const restaurant = restaurants.find( 
@@ -19,6 +21,7 @@ app.get('/restaurants/:restaurant_id', (req, res) => {
   res.render('show', { restaurant })
 })
 
+// search result route
 app.get('/search', (req, res) => {
   if (!req.query.keywords) {
     res.redirect('/')
